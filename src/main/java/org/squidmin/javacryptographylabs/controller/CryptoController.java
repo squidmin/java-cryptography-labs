@@ -2,10 +2,9 @@ package org.squidmin.javacryptographylabs.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.squidmin.javacryptographylabs.service.CryptoService;
 
 import javax.crypto.SecretKey;
@@ -35,6 +34,13 @@ public class CryptoController {
     @PostMapping("/decrypt")
     public String decrypt(@RequestBody String encryptedData) throws Exception {
         return cryptoService.decrypt(encryptedData, key, iv);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
+        // Optionally log the exception or handle specific exceptions differently
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
 }

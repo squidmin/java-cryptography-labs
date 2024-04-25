@@ -9,7 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 @SpringBootTest
-public class CryptoServiceIntegrationTest {
+public class CryptoServiceTest {
 
     private CryptoService cryptoService;
     private SecretKey secretKey;
