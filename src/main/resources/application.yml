@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path: /
+  port: 8080
+
+spring:
+  cloud:
+    gcp:
+      config:
+        credentials:
+          location: /home/runner/work/java-cryptography-labs/java-cryptography-labs/java-cryptography-labs-service-key.json
+  jackson:
+    default-property-inclusion: non_null
+    deserialization:
+      accept-float-as-int: false
+      fail-on-numbers-for-enums: true
+      fail-on-unknown-properties: true
+    mapper:
+      allow-coercion-of-scalars: false
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: false
+  application:
+    name: java-cryptography-labs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
